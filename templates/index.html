@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ganz X - OFC | LIKE FF</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,sans-serif;
+    color:#fff;
+    background:
+        radial-gradient(circle at 10% 10%,#351329 0%,transparent 35%),
+        radial-gradient(circle at 90% 90%,#17244b 0%,transparent 35%),
+        #08090f;
+    padding:25px 15px;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(18,20,32,.94);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:25px 20px;
+    box-shadow:0 15px 50px rgba(0,0,0,.45);
+}
+
+/* FOTO PROFIL */
+.profile{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:0 auto 15px;
+    border:3px solid #ff2da6;
+    box-shadow:0 0 25px rgba(255,45,166,.45);
+}
+
+h1{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:6px;
+    background:linear-gradient(90deg,#ff2da6,#9b5cff,#25d9ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    text-align:center;
+    color:#aeb3c7;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    color:#b9bfd4;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    height:52px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:#0d0f18;
+    border:1px solid #292d40;
+    color:#fff;
+    padding:0 15px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    border-color:#ff2da6;
+    box-shadow:0 0 0 3px rgba(255,45,166,.1);
+}
+
+select option{
+    background:#0d0f18;
+    color:#fff;
+}
+
+button{
+    width:100%;
+    height:52px;
+    border:0;
+    border-radius:14px;
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(90deg,#ff1493,#8b45ff);
+    box-shadow:0 8px 25px rgba(255,20,147,.25);
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.status{
+    display:none;
+    text-align:center;
+    margin-top:18px;
+    color:#bfc5da;
+    font-size:14px;
+}
+
+.result{
+    display:none;
+    margin-top:20px;
+}
+
+.result-title{
+    font-size:16px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.result-box{
+    background:#0d0f18;
+    border:1px solid #25293a;
+    border-radius:13px;
+    padding:13px;
+}
+
+.result-box .name{
+    color:#858ba2;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.result-box .value{
+    font-size:14px;
+    font-weight:bold;
+    word-break:break-word;
+}
+
+.success{
+    color:#48ff9b;
+}
+
+.channel{
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    margin-top:15px;
+    padding:15px;
+    border-radius:14px;
+    background:#111522;
+    border:1px solid #292d40;
+    color:#fff;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.channel:hover{
+    background:#171b2b;
+}
+
+.footer{
+    text-align:center;
+    color:#666c82;
+    font-size:11px;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <img
+            src="/static/profil.png"
+            class="profile"
+            alt="Profile"
+        >
+
+        <h1>Ganz X - OFC</h1>
+
+        <div class="subtitle">
+            LIKE FF • Free Fire Like Sender
+        </div>
+
+        <div class="input-group">
+            <label>UID FREE FIRE</label>
+
+            <input
+                type="number"
+                id="uid"
+                placeholder="Masukkan UID kamu"
+                autocomplete="off"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>REGION</label>
+
+            <select id="region">
+                <option value="ID">Indonesia (ID)</option>
+                <option value="BR">Brazil (BR)</option>
+                <option value="IND">India (IND)</option>
+                <option value="BD">Bangladesh (BD)</option>
+                <option value="US">United States (US)</option>
+                <option value="SAC">South America (SAC)</option>
+                <option value="NA">North America (NA)</option>
+            </select>
+        </div>
+
+        <button id="sendBtn" onclick="sendLike()">
+            ❤️ KIRIM LIKE
+        </button>
+
+        <div id="status" class="status">
+            ⏳ Sedang memproses...
+        </div>
+
+        <div id="result" class="result">
+
+            <div class="result-title">
+                📊 HASIL
+            </div>
+
+            <div class="result-grid">
+
+                <div class="result-box">
+                    <div class="name">NICKNAME</div>
+                    <div class="value" id="nickname">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="name">UID</div>
+                    <div class="value" id="resultUid">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="name">LIKE SEBELUM</div>
+                    <div class="value" id="before">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="name">LIKE SESUDAH</div>
+                    <div class="value" id="after">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="name">LIKE DIBERIKAN</div>
+                    <div class="value success" id="given">-</div>
+                </div>
+
+                <div class="result-box">
+                    <div class="name">REGION</div>
+                    <div class="value" id="resultRegion">-</div>
+                </div>
+
+            </div>
+        </div>
+
+        <a
+            class="channel"
+            href="https://whatsapp.com/channel/0029Vb8HNh7DeOMyrMwvQF3Y"
+            target="_blank"
+        >
+            📢 JOIN CHANNEL WHATSAPP
+        </a>
+
+        <div class="footer">
+            Ganz X - OFC • Free Fire Like Sender
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+async function sendLike(){
+
+    const uid = document.getElementById("uid").value.trim();
+    const region = document.getElementById("region").value;
+
+    const button = document.getElementById("sendBtn");
+    const status = document.getElementById("status");
+    const result = document.getElementById("result");
+
+    if(!uid){
+        alert("Masukkan UID Free Fire terlebih dahulu!");
+        return;
+    }
+
+    button.disabled = true;
+    button.innerText = "⏳ MEMPROSES...";
+    status.style.display = "block";
+    result.style.display = "none";
+
+    try{
+
+        const response = await fetch("/api/like",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                uid:uid,
+                region:region
+            })
+        });
+
+        const data = await response.json();
+
+        if(!response.ok){
+            throw new Error(
+                data.error || "Gagal menghubungi API"
+            );
+        }
+
+        document.getElementById("nickname").innerText =
+            data.PlayerNickname ||
+            data.nickname ||
+            "-";
+
+        document.getElementById("resultUid").innerText =
+            data.UID ||
+            data.uid ||
+            uid;
+
+        document.getElementById("before").innerText =
+            data.LikesbeforeCommand ??
+            data.before ??
+            "-";
+
+        document.getElementById("after").innerText =
+            data.LikesafterCommand ??
+            data.after ??
+            "-";
+
+        document.getElementById("given").innerText =
+            data.LikesGivenByAPI ??
+            data.given ??
+            "0";
+
+        document.getElementById("resultRegion").innerText =
+            data.Region ||
+            data.region ||
+            region;
+
+        result.style.display = "block";
+
+    }catch(error){
+
+        alert("❌ " + error.message);
+
+    }finally{
+
+        button.disabled = false;
+        button.innerText = "❤️ KIRIM LIKE";
+        status.style.display = "none";
+
+    }
+}
+</script>
+
+</body>
+</html>
