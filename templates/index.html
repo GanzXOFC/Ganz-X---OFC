@@ -344,7 +344,8 @@ async function sendLike(){
             })
         });
 
-        const data = await response.json();
+const responseData = await response.json();
+const data = responseData.data || responseData;
 
         if(!response.ok){
             throw new Error(
